@@ -1,0 +1,10 @@
+// Build Docker Image 
+docker build -t express-server .
+// Run Image
+docker run -p 4000:4000 express-server
+
+
+// Build Docker Image 
+docker build -t react-client .
+// Run Image
+docker run -p 5174:4000 react-client

@@ -1,0 +1,29 @@
+#build stage
+FROM node:22-alpine as Build
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+RUN npm run build
+
+#production stage
+From node:22-alpine
+
+WORKDIR /app
+
+RUN npm install -g serve
+
+ENV PATH = "/usr/local/bin:$PATH"
+
+COPY --from=Build /app/dist ./dist
+
+EXPOSE 3000
+
+CMD ["serve", "-s", "dist", "-l", "3000"]
+
+
